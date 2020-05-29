@@ -1,4 +1,6 @@
-//TODO: Add your imports here.
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 const List<String> currenciesList = [
   'AUD',
@@ -34,5 +36,42 @@ const coinAPIURL = 'https://rest.coinapi.io/v1/exchangerate';
 const apiKey = 'YOUR-API-KEY-HERE';
 
 class CoinData {
-  //TODO: Create your getCoinData() method here.
+  String urlBTC = "https://rest.coinapi.io/v1/exchangerate/BTC/";
+  String urlETH = "https://rest.coinapi.io/v1/exchangerate/ETH/";
+  String urlLTC = "https://rest.coinapi.io/v1/exchangerate/LTC/";
+  Map header = {  };
+
+  dynamic rate = '?';
+  String paire = 'USD';
+
+  String getBTCPair(String pair) {
+    paire = pair;
+    return urlBTC + "$pair";
+  }
+
+  String getETHPair(String pair) {
+    paire = pair;
+    return urlETH + "$pair";
+  }
+
+  String getLTCPair(String pair) {
+    paire = pair;
+    return urlLTC + "$pair";
+  }
+
+  void getData(String url) async {
+    final resp = await http.get(
+      url,
+      headers: { "X-CoinAPI-Key" : "3152C52C-3370-4AEB-859A-BA383ACDEC42" },
+    );
+    print(resp);
+    if (resp.statusCode == 200) {
+      var data = jsonDecode(resp.body)["rate"];
+      rate = double.parse(data.toString()).toStringAsFixed(4);
+    }
+  }
+
+
+   //TODO: Create your getCoinData() method here.
+
 }

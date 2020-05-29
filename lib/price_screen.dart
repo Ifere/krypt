@@ -15,6 +15,7 @@ class _PriceScreenState extends State<PriceScreen> {
     List<DropdownMenuItem<String>> dropdownItems = [];
     for (String currency in currenciesList) {
       var newItem = DropdownMenuItem(
+
         child: Text(currency),
         value: currency,
       );
@@ -27,6 +28,9 @@ class _PriceScreenState extends State<PriceScreen> {
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
+          coins.getData(coins.getBTCPair(value));
+
+
         });
       },
     );
@@ -49,6 +53,8 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   //TODO: Create a method here called getData() to get the coin data from coin_data.dart
+  CoinData coins = new CoinData();
+
 
   @override
   void initState() {
@@ -78,7 +84,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
                   //TODO: Update the Text Widget with the live bitcoin data here.
-                  '1 BTC = ? USD',
+                  '1 BTC = ${coins.rate} ${coins.paire}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
