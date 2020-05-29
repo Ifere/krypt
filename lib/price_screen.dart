@@ -59,11 +59,12 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    //TODO: Call getData() when the screen loads up.
+    coins.getData(coins.getBTCPair('USD'));
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Coin Ticker'),
