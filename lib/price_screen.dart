@@ -28,7 +28,9 @@ class _PriceScreenState extends State<PriceScreen> {
       onChanged: (value) {
         setState(() {
           selectedCurrency = value;
-          coins.getData(coins.getBTCPair(value));
+          coins.getBTCData(coins.getBTCPair(value));
+          coins.getETHData(coins.getETHPair(value));
+          coins.getLTCData(coins.getLTCPair(value));
 
 
         });
@@ -59,7 +61,9 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    coins.getData(coins.getBTCPair('USD'));
+    coins.getBTCData(coins.getBTCPair('USD'));
+    coins.getETHData(coins.getETHPair('USD'));
+    coins.getLTCData(coins.getLTCPair('USD'));
   }
 
   @override
@@ -76,7 +80,7 @@ class _PriceScreenState extends State<PriceScreen> {
           Padding(
             padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
             child: Card(
-              color: Colors.lightBlueAccent,
+              color: Colors.blueAccent,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -85,7 +89,7 @@ class _PriceScreenState extends State<PriceScreen> {
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
                   //TODO: Update the Text Widget with the live bitcoin data here.
-                  '1 BTC = ${coins.rate} ${coins.paire}',
+                  '1 BTC = ${coins.btcVal} ${coins.btcRate}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
@@ -95,6 +99,51 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            child: Card(
+              color: Colors.deepOrange,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  //TODO: Update the Text Widget with the live bitcoin data here.
+                  '1 ETH = ${coins.ethVal} ${coins.ethRate}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            child: Card(
+              color: Colors.white70,
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                child: Text(
+                  //TODO: Update the Text Widget with the live bitcoin data here.
+                  '1 LTC = ${coins.ltcVal} ${coins.ltcRate}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           Container(
             height: 150.0,
             alignment: Alignment.center,
